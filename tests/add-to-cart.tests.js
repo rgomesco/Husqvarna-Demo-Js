@@ -52,7 +52,7 @@ test("Exploring products , applying filter , adding products to cart", async t =
     await t.expect(homePage.pageTitle.innerText).contains(homePageData.homePageTitle, "Home page title does not match");
 });
 
-test.only("Deleting item from cart", async t => {
+test("Deleting item from cart", async t => {
     await helper.searchAndAddProductToCart(productDetailsData.product1);
     await t.expect(checkoutPage.pageTitle.innerText).contains(cartData.cartPageTitle, "Cart page title does not match");
     await t.expect(checkoutPage.checkoutListItemName.innerText).contains(productDetailsData.product1.checkoutName, "Product name in cart does not match with the added product");
