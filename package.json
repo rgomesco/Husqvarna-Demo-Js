@@ -4,7 +4,8 @@
   "description": "Demo project for Husqvarna interview",
   "main": "index.js",
   "scripts": {
-    "test": "testcafe"
+    "tests": "testcafe ; npm run allure-report",
+    "allure-report": "allure generate ./reports/allure/allure-results --clean -o ./reports/allure/allure-report && allure open ./reports/allure/allure-report"
   },
   "keywords": [
     "Testcafe",
@@ -14,7 +15,9 @@
   "author": "Rodolfo Gomes Coutinho",
   "license": "ISC",
   "dependencies": {
+    "allure-commandline": "^2.34.1",
     "testcafe": "^3.7.2",
+    "testcafe-reporter-allure": "^1.0.5",
     "testcafe-reporter-html": "^1.4.6"
   }
 }
