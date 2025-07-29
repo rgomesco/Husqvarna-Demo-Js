@@ -18,6 +18,12 @@ module.exports = {
         path: "./reports/screenshots",
         pathPattern: "${DATE}_${TIME}/{USERAGENT}/${TEST}/${FILE_INDEX}.png"
     },
+    videoPath: "./reports/videos",
+    videoOptions: {
+        singleFile: false,
+        failedOnly: true,
+        pathPattern: "${DATE}_${TIME}/${USERAGENT}/${TEST}.mp4"
+    },
     hooks: {
         test: {
             before: async (t) => {
