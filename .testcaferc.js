@@ -16,7 +16,7 @@ module.exports = {
     screenshots: {
         takeOnFails: true,
         path: "./reports/screenshots",
-        pathPattern: "${DATE}_${TIME}/{USERAGENT}/${TEST}/${FILE_INDEX}.png"
+        pathPattern: "${DATE}_${TIME}/${USERAGENT}/${TEST}.png"
     },
     videoPath: "./reports/videos",
     videoOptions: {
