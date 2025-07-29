@@ -19,7 +19,7 @@ const addedToCartSideDrawer = new AddedToCartSideDrawer();
 const cartSideDrawer = new CartSideDrawer();
 
 fixture("Add to cart tests")
-    .page(homePageData.homePageUrl);
+    .page("./");
 
 test.meta({ smoke: "true", regression: "true" })
     ("Adding product to cart and checkout", async t => {

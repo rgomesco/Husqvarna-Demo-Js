@@ -9,7 +9,7 @@ const navBar = new NavBar();
 const footer = new Footer();
 
 fixture("Home page tests")
-    .page(homePageData.homePageUrl);
+    .page("./");
 
 test.meta({ smoke: "true" })
     ("Home page verification", async t => {
