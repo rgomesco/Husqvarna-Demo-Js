@@ -9,11 +9,18 @@ class CheckoutPage {
         this.continueShopping = Selector("#continue-shopping-button");
         this.deleteProductBtn = Selector("button[class='product-card-btn remove-btn-lg remove-product btn btn-light']");
         this.emptyCartMessage = Selector("[class='col-12 text-left'] h2");
+        this.checkoutListItemQuantity = Selector("input.form-control.quantity");
+        this.continueToDeliveryBtn = Selector(".container.checkout-continue div");
     }
 
     async deleteProductFromCart(productName) {
         const productToDelete = this.deleteProductBtn.withAttribute("data-name", productName);
         await t.click(productToDelete);
+    }
+
+    async getProductQuantity(productName) {
+        const product = this.checkoutListItemQuantity.withAttribute("data-name", productName);
+        return product.value;
     }
 }
 
