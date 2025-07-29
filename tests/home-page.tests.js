@@ -11,12 +11,13 @@ const footer = new Footer();
 fixture("Home page tests")
     .page(homePageData.homePageUrl);
 
-test("Home page verification", async t => {
-    await t.expect(homePage.pageTitle.innerText).contains(homePageData.homePageTitle, "Home page title does not match");
-    await t.expect(await navBar.verifyMenuOptions(navBar.menuOptions, navBarData.menuOptions)).ok("Menu options verification failed");
-    await t.hover(navBar.menuOptionsProducts);
-    await t.expect(await navBar.verifyMenuOptions(navBar.productsMenuOptions, navBarData.productsMenuOptions)).ok("Product menu options verification failed");
-});
+test.meta({ smoke: "true" })
+    ("Home page verification", async t => {
+        await t.expect(homePage.pageTitle.innerText).contains(homePageData.homePageTitle, "Home page title does not match");
+        await t.expect(await navBar.verifyMenuOptions(navBar.menuOptions, navBarData.menuOptions)).ok("Menu options verification failed");
+        await t.hover(navBar.menuOptionsProducts);
+        await t.expect(await navBar.verifyMenuOptions(navBar.productsMenuOptions, navBarData.productsMenuOptions)).ok("Product menu options verification failed");
+    });
 
 test("External Link navigation", async t => {
     const currentWindow = await t.getCurrentWindow();
