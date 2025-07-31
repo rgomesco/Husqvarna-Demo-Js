@@ -9,6 +9,13 @@ const productDetailsPage = new ProductDetailsPage();
 const addedToCartSideDrawer = new AddedToCartSideDrawer();
 
 class Helper {
+    /**
+     * Waits until the given element is enabled (does not have the 'disabled' attribute) or times out.
+     * @param {Selector} element - The element to check
+     * @param {number} timeout - Maximum time to wait in milliseconds (default 10000)
+     * @param {number} interval - Interval between checks in milliseconds (default 250)
+     * @throws {Error} If the element is not enabled within the timeout
+     */
     async waitUntilElementIsEnabled(element, timeout = 10000, interval = 250) {
         const startTime = Date.now();
         while (Date.now() - startTime < timeout) {
@@ -20,6 +27,11 @@ class Helper {
         throw new Error(`Element was not enabled within ${timeout}ms.`);
     }
 
+    /**
+     * Searches for a product using the search bar, verifies product details, adds it to the cart, and proceeds to checkout.
+     * @param {Object} productData - The product data to search and add
+     * @param {number} elementIndexInSearchList - Index of the product in the search results (default 0)
+     */
     async searchAndAddProductToCart(productData, elementIndexInSearchList = 0) {
         await t.click(navBar.searchIcon);
         await t.typeText(navBar.searchInput, productData.searchTerm);

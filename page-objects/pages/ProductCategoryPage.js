@@ -17,19 +17,49 @@ class ProductCategoryPage {
         this.productFirstCardWithAddToCartBtnPrice = this.productFirstCardWithAddToCartBtn.parent("[class='hui-box hui-flexbox--container hui-size--sm-w-full hbd-card__frame']").find("[data-ui-component='ProductPrice'] span");
     }
 
+    /**
+     * Sets the price range slider values for min and max.
+     * Directly manipulates the DOM elements and dispatches change events.
+     * @param {number|string} minValue - The minimum value to set
+     * @param {number|string} maxValue - The maximum value to set
+     */
     async setSliderValue(minValue, maxValue) {
+
+        await this.setSliderMinValue(minValue);
+        await this.setSliderMaxValue(maxValue);
+    }
+
+    /**
+     * Sets the price range slider values for min .
+     * Directly manipulates the DOM elements and dispatches change events.
+     * @param {number|string} minValue - The minimum value to set
+     */
+    async setSliderMinValue(minValue) {
         await t.eval(() => {
             const rangeMinElement = document.getElementById(minElementSelector);
             rangeMinElement.value = minValue;
             rangeMinElement.dispatchEvent(new Event('change', { bubbles: true }));
+        }, {
+            dependencies: {
+                minValue,
+                minElementSelector: this.priceRangeSliderMinSelector
+            }
+        });
+    }
 
+    /**
+     * Sets the price range slider values for max .
+     * Directly manipulates the DOM elements and dispatches change events.
+     * @param {number|string} maxValue - The maximum value to set
+     */
+    async setSliderMaxValue(maxValue) {
+        await t.eval(() => {
             const rangeMaxElement = document.getElementById(maxElementSelector);
             rangeMaxElement.value = maxValue;
             rangeMaxElement.dispatchEvent(new Event('change', { bubbles: true }));
         }, {
             dependencies: {
-                minValue, maxValue,
-                minElementSelector: this.priceRangeSliderMinSelector,
+                maxValue,
                 maxElementSelector: this.priceRangeSliderMaxSelector
             }
         });
