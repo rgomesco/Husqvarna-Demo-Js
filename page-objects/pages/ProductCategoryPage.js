@@ -8,6 +8,8 @@ class ProductCategoryPage {
         this.sortButton = Selector("#dropdown-button-product-list-toolbar-sortbox");
         this.priceRangeSliderMinSelector = "minRangeInput-from_price_incl_vat_td";
         this.priceRangeSliderMaxSelector = "maxRangeInput-from_price_incl_vat_td";
+        this.priceRangeSliderMinInput = Selector("#minRangeInput-from_price_incl_vat_td");
+        this.priceRangeSliderMaxInput = Selector("#maxRangeInput-from_price_incl_vat_td");
         this.priceRangeSliderMinLabel = Selector("label[for='minRangeInput-from_price_incl_vat_td']");
         this.priceRangeSliderMaxLabel = Selector("label[for='maxRangeInput-from_price_incl_vat_td']");
         this.productCards = Selector("[data-card-type='machine-specification']");
@@ -63,6 +65,20 @@ class ProductCategoryPage {
                 maxElementSelector: this.priceRangeSliderMaxSelector
             }
         });
+    }
+
+    /**
+     * Verifies that the slider's min and max input values are within the expected range.
+     * Checks if the actual values are within one step of the expected min and max values.
+     * @param {number} minValue - The expected minimum value
+     * @param {number} maxValue - The expected maximum value
+     */
+    async verifySliderValues(minValue, maxValue) {
+        const minLabelValue = parseInt(await this.priceRangeSliderMinInput.getAttribute("value"), 10);
+        const maxLabelValue = parseInt(await this.priceRangeSliderMaxInput.getAttribute("value"), 10);
+        const sliderStep = parseInt(await this.priceRangeSliderMinInput.getAttribute("step"), 10); // Assuming the slider steps are in increments of 1
+        await t.expect(minLabelValue).within(minValue - sliderStep, minValue + sliderStep, "Min label value does not match expected value")
+            .expect(maxLabelValue).within(maxValue - sliderStep, maxValue + sliderStep, "Max label value does not match expected value");
     }
 }
 
