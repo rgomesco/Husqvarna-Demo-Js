@@ -29,6 +29,11 @@ module.exports = {
         test: {
             before: async (t) => {
                 await t.maximizeWindow();
+                const { Selector } = require("testcafe");
+                const acceptAllCookiesButton = Selector("#onetrust-accept-btn-handler").with({ boundTestRun: t });
+                if (await acceptAllCookiesButton.exists) {
+                    await t.click(acceptAllCookiesButton);
+                }
             }
         }
     }

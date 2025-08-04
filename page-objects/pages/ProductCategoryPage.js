@@ -74,9 +74,9 @@ class ProductCategoryPage {
      * @param {number} maxValue - The expected maximum value
      */
     async verifySliderValues(minValue, maxValue) {
-        const minLabelValue = parseInt(await this.priceRangeSliderMinInput.getAttribute("value"), 10);
-        const maxLabelValue = parseInt(await this.priceRangeSliderMaxInput.getAttribute("value"), 10);
-        const sliderStep = parseInt(await this.priceRangeSliderMinInput.getAttribute("step"), 10); // Assuming the slider steps are in increments of 1
+        const minLabelValue = parseInt(await this.priceRangeSliderMinInput.getAttribute("value"));
+        const maxLabelValue = parseInt(await this.priceRangeSliderMaxInput.getAttribute("value"));
+        const sliderStep = parseInt(await this.priceRangeSliderMinInput.getAttribute("step")); // Assuming the slider steps are in increments of 1
         await t.expect(minLabelValue).within(minValue - sliderStep, minValue + sliderStep, "Min label value does not match expected value")
             .expect(maxLabelValue).within(maxValue - sliderStep, maxValue + sliderStep, "Max label value does not match expected value");
     }
